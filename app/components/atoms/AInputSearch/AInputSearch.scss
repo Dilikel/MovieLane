@@ -1,0 +1,19 @@
+.s-input-search {
+	height: 40px;
+	padding: 0 15px;
+	border: none;
+	border-radius: 20px;
+	background-color: #2c2c2c;
+	color: #e0e0e0;
+	width: 300px;
+	transition: all 0.3s ease;
+	margin-right: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	&::placeholder {
+		color: #888;
+	}
+
+	&:focus {
+		background-color: #333;
+	}
+}

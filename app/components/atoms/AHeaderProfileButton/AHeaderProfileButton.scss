@@ -1,0 +1,19 @@
+.a-profile-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 5px 10px;
+	transition: color 0.3s ease;
+	border-radius: 10px;
+	&:hover {
+		color: var(--yellow);
+	}
+	&-icon {
+		width: 35px;
+		height: 35px;
+	}
+}
