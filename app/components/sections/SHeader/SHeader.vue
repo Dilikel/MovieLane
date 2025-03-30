@@ -45,9 +45,17 @@ const menuItems = [
 					<span class="hamburger-inner"></span>
 				</span>
 			</button>
-			<AInputSearch v-if="$device.isMobileOrTablet" />
+			<AMobileInputSearch />
 		</div>
 	</header>
+
+	<div
+		class="s-mobile-menu-overflow"
+		@click="isMenuOpen = false"
+		:class="{ open: isMenuOpen }"
+	></div>
+
+	<div class="s-mobile-menu" v-if="isMenuOpen"></div>
 </template>
 
 <style src="./SHeader.scss" lang="scss" scoped />
