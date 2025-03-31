@@ -1,8 +1,15 @@
-<script setup></script>
+<script setup>
+const emit = defineEmits(['search'])
+</script>
 
 <template>
 	<div class="s-search">
-		<input type="text" class="s-search-input" placeholder="Поиск" />
+		<input
+			type="text"
+			class="s-search-input"
+			placeholder="Поиск"
+			@input="emit('search', $event.target.value)"
+		/>
 	</div>
 </template>
 

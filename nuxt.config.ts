@@ -2,11 +2,15 @@
 export default defineNuxtConfig({
 	compatibilityDate: '2024-11-01',
 	devtools: { enabled: true },
-	pages: true,
 	srcDir: 'app/',
-	serverDir: '.server/',
+	serverDir: 'server/',
 	ssr: true,
-
+	runtimeConfig: {
+		public: {
+			API_URL: process.env.API_URL,
+			SECRET_KEY: process.env.SECRET_KEY,
+		},
+	},
 	nitro: {
 		preset: 'vercel-edge',
 		publicAssets: [
@@ -53,5 +57,11 @@ export default defineNuxtConfig({
 		},
 	},
 
-	modules: ['@nuxtjs/device', '@nuxt/icon', '@pinia/nuxt'],
+	modules: [
+		'@nuxtjs/device',
+		'@nuxt/icon',
+		'@pinia/nuxt',
+		'@formkit/auto-animate/nuxt',
+		'@nuxtjs/tailwindcss',
+	],
 })

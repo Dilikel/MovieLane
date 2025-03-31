@@ -1,11 +1,13 @@
 <script setup>
 import 'hamburgers/dist/hamburgers.min.css'
 import { useUserStore } from '~/stores/user'
+import { useSearchQueryStore } from '~/stores/searchQuery'
 import { storeToRefs } from 'pinia'
 
 const isLoading = ref(false)
 const isMenuOpen = ref(false)
 const userStore = useUserStore()
+const searchQueryStore = useSearchQueryStore()
 const { user } = storeToRefs(userStore)
 const menuItems = [
 	{
@@ -18,6 +20,7 @@ const menuItems = [
 		name: 'Мультфильмы',
 	},
 ]
+const mobileMenuItems = [...menuItems, { name: 'Профиль' }]
 </script>
 
 <template>
@@ -33,7 +36,9 @@ const menuItems = [
 			</div>
 
 			<div class="s-header-right-panel">
-				<AInputSearch />
+				<AInputSearch
+					@search="newValue => searchQueryStore.updateQuery(newValue)"
+				/>
 				<ALoader v-if="isLoading" />
 				<div v-else>
 					<AHeaderLoginButton v-if="!user.value" />
@@ -49,7 +54,10 @@ const menuItems = [
 					<span class="hamburger-inner"></span>
 				</span>
 			</button>
-			<AInputSearch v-if="$device.isMobileOrTablet" />
+			<AInputSearch
+				v-if="$device.isMobile"
+				@search="newValue => searchQueryStore.updateQuery(newValue)"
+			/>
 		</div>
 	</header>
 
@@ -65,7 +73,11 @@ const menuItems = [
 			<Icon name="ci:close-lg" @click="isMenuOpen = false" />
 		</div>
 		<div class="s-mobile-menu-list">
-			<AMenuItem v-for="item in menuItems" :key="item.name" :name="item.name" />
+			<AMenuItem
+				v-for="item in mobileMenuItems"
+				:key="item.name"
+				:name="item.name"
+			/>
 		</div>
 	</div>
 </template>

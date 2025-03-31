@@ -1,3 +1,38 @@
-<script setup></script>
+<script setup>
+import { useSearchQueryStore } from '~/stores/searchQuery'
 
-<template></template>
+const searchQueryStore = useSearchQueryStore()
+const items = ref([])
+const isLoading = ref(true)
+async function fetchItems() {
+	await $fetch('/api/movies', {
+		params: { name: searchQueryStore.query },
+	})
+		.then(response => {
+			items.value = response
+		})
+		.catch(error => {
+			console.error('Error fetching movies:', error)
+		})
+		.finally(() => {
+			isLoading.value = false
+		})
+}
+watch(
+	() => searchQueryStore.query,
+	() => {
+		fetchItems()
+	}
+)
+
+onMounted(async () => {
+	await fetchItems()
+})
+</script>
+
+<template>
+	<div class="min-h-screen">
+		<SLoader v-if="isLoading" />
+		<SMovieCardList v-else :items="items" />
+	</div>
+</template>
