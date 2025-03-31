@@ -55,7 +55,12 @@ const menuItems = [
 		:class="{ open: isMenuOpen }"
 	></div>
 
-	<div class="s-mobile-menu" v-if="isMenuOpen"></div>
+	<div class="s-mobile-menu" v-if="isMenuOpen">
+		<div class="s-mobile-menu-header">
+			<h2 class="mobile-menu-header-h2">Меню</h2>
+			<Icon name="ci:close-lg" @click="isMenuOpen = false" />
+		</div>
+	</div>
 </template>
 
 <style src="./SHeader.scss" lang="scss" scoped />

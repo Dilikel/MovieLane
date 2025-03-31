@@ -74,3 +74,45 @@
 		}
 	}
 }
+
+.s-mobile-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 70%;
+	height: 100%;
+	background-color: white;
+	z-index: 999;
+	transform: translateX(100%);
+	transition: transform 0.4s ease-in-out;
+	&.open {
+		transform: translateX(0);
+	}
+	&-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px;
+		border-bottom: 2px solid rgba(0, 0, 0, 0.082);
+		&-h2 {
+			font-size: 24px;
+		}
+	}
+
+	&-overflow {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		z-index: 998;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+		&.open {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
