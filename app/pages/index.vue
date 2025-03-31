@@ -32,7 +32,7 @@ onMounted(async () => {
 
 <template>
 	<div class="min-h-screen">
-		<SLoader v-if="isLoading" />
-		<SMovieCardList v-else :items="items" />
+		<SLoader :is-loading="isLoading" />
+		<SMovieCardList :items="items" />
 	</div>
 </template>

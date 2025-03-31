@@ -51,12 +51,15 @@
 			height: 24px;
 		}
 	}
+	&-mobile-search {
+		display: none;
+	}
 }
 
 @media (max-width: 1024px) {
 	.s-header {
 		&-menu-list {
-			gap: 15px;
+			display: none;
 		}
 	}
 }
@@ -71,6 +74,9 @@
 			display: none;
 		}
 		.hamburger {
+			display: block;
+		}
+		&-mobile-search {
 			display: block;
 		}
 	}

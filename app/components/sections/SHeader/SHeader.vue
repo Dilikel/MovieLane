@@ -55,7 +55,7 @@ const mobileMenuItems = [...menuItems, { name: 'Профиль' }]
 				</span>
 			</button>
 			<AInputSearch
-				v-if="$device.isMobile"
+				class="s-header-mobile-search"
 				@search="newValue => searchQueryStore.updateQuery(newValue)"
 			/>
 		</div>

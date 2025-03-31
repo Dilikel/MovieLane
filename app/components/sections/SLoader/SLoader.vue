@@ -1,5 +1,11 @@
+<script setup>
+defineProps({
+	isLoading: Boolean,
+})
+</script>
+
 <template>
-	<div class="s-loader">
+	<div class="s-loader" :class="{ hidden: isLoading }">
 		<div class="s-loader-spinner"></div>
 	</div>
 </template>
