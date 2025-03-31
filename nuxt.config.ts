@@ -53,5 +53,5 @@ export default defineNuxtConfig({
 		},
 	},
 
-	modules: ['@nuxtjs/device', '@nuxt/icon'],
+	modules: ['@nuxtjs/device', '@nuxt/icon', '@pinia/nuxt'],
 })
