@@ -11,9 +11,7 @@ async function fetchItems() {
 		.then(response => {
 			items.value = response
 		})
-		.catch(error => {
-			console.error('Error fetching movies:', error)
-		})
+		.catch(error => {})
 		.finally(() => {
 			isLoading.value = false
 		})
@@ -31,8 +29,8 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div class="min-h-screen">
+	<main class="main">
 		<SLoader :is-loading="isLoading" />
 		<SMovieCardList :items="items" />
-	</div>
+	</main>
 </template>

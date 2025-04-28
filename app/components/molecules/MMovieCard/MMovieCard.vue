@@ -6,14 +6,10 @@ defineProps({
 	name: String,
 	genres: String,
 })
-
-const goToMovie = id => {
-	navigateTo(`/movie/${id}`)
-}
 </script>
 
 <template>
-	<div class="m-movie-card" @click="goToMovie(id)">
+	<div class="m-movie-card" @click="navigateTo(id)">
 		<div class="m-movie-card-image">
 			<img :src="imageUrl" alt="movie" class="m-movie-card-img" />
 			<div

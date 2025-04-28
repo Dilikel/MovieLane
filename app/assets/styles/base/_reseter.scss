@@ -4,8 +4,6 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	-webkit-tap-highlight-color: transparent;
-	font-family: 'Montserrat', sans-serif !important;
 }
 
 html {
@@ -65,10 +63,4 @@ iframe {
 table {
 	border-spacing: 0;
 	border-collapse: collapse;
-}
-
-.container {
-	max-width: 1400px;
-	margin: 0 auto;
-	padding: 0 20px;
 }

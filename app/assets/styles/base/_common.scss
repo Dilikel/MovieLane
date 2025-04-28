@@ -6,4 +6,15 @@ html {
 body {
 	height: 100%;
 	background: var(--dark-gray);
+	-webkit-tap-highlight-color: transparent;
+}
+
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.main {
+	min-height: 100vh;
 }
