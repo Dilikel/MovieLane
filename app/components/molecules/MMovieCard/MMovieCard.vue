@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-	<div class="m-movie-card" @click="navigateTo(id)">
+	<div class="m-movie-card" @click="navigateTo(`movie/${id}`)">
 		<div class="m-movie-card-image">
 			<img :src="imageUrl" alt="movie" class="m-movie-card-img" />
 			<div

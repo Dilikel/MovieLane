@@ -12,7 +12,6 @@
 	"dependencies": {
 		"@formkit/auto-animate": "^0.8.2",
 		"@nuxt/icon": "^1.11.0",
-		"@nuxtjs/device": "^3.2.4",
 		"@pinia/nuxt": "^0.10.1",
 		"animate.css": "^4.1.1",
 		"hamburgers": "^1.2.1",

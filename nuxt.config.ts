@@ -57,11 +57,5 @@ export default defineNuxtConfig({
 		},
 	},
 
-	modules: [
-		'@nuxtjs/device',
-		'@nuxt/icon',
-		'@pinia/nuxt',
-		'@formkit/auto-animate/nuxt',
-		'@nuxtjs/tailwindcss',
-	],
+	modules: ['@nuxt/icon', '@pinia/nuxt', '@formkit/auto-animate/nuxt'],
 })
