@@ -1,0 +1,25 @@
+.a-auth-form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	&-label {
+		color: white;
+	}
+	&-input {
+		padding: 12px;
+		background-color: var(--input-gray);
+		color: var(--input-text-gray);
+		border-radius: 12px;
+		width: 100%;
+		font-size: 18px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		&::placeholder {
+			color: var(--light-gray);
+		}
+
+		&:focus {
+			background-color: var(--input-gray-focus);
+		}
+	}
+}

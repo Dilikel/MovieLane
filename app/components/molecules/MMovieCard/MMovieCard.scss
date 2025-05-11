@@ -1,5 +1,5 @@
 .m-movie-card {
-	background-color: #1f1f1f;
+	background-color: var(--card-dark-gray);
 	border-radius: 15px;
 	overflow: hidden;
 	position: relative;
@@ -17,14 +17,14 @@
 		width: 100%;
 		height: auto;
 		display: block;
-		border-bottom: 5px solid #1f1f1f;
+		border-bottom: 5px solid var(--card-dark-gray);
 	}
 	&-cover {
 		position: absolute;
 		top: 10px;
 		left: 10px;
 		z-index: 1;
-		background-color: #1f1f1f;
+		background-color: var(--card-dark-gray);
 		border: 3px solid;
 		border-radius: 50%;
 		width: 50px;
