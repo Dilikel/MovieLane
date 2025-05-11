@@ -2,13 +2,13 @@
 import 'hamburgers/dist/hamburgers.min.css'
 import { useUserStore } from '~/stores/user'
 import { useSearchQueryStore } from '~/stores/searchQuery'
-import { storeToRefs } from 'pinia'
 
 const isLoading = ref(false)
 const isMenuOpen = ref(false)
+const token = useCookie('token')
 const userStore = useUserStore()
 const searchQueryStore = useSearchQueryStore()
-const { user } = storeToRefs(userStore)
+const user = computed(() => userStore.user)
 const menuItems = [
 	{
 		name: 'Фильмы',
@@ -21,6 +21,28 @@ const menuItems = [
 	},
 ]
 const mobileMenuItems = [...menuItems, { name: 'Профиль' }]
+
+async function fetchUser() {
+	isLoading.value = true
+	await $fetch('/api/auth/me', {
+		headers: {
+			Authorization: `Bearer ${token.value}`,
+		},
+	})
+		.then(response => {
+			userStore.setUser(response.user)
+		})
+		.catch(error => {
+			console.error('Error fetching user:', error)
+		})
+		.finally(() => {
+			isLoading.value = false
+		})
+}
+
+onMounted(async () => {
+	token.value ? await fetchUser() : null
+})
 </script>
 
 <template>

@@ -1,0 +1,18 @@
+.m-auth-account-prompt {
+	margin-top: 2rem;
+	text-align: center;
+
+	&-text {
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+		color: var(--light-gray);
+	}
+
+	&-link {
+		transition: color 0.3s;
+		color: var(--yellow);
+		&:hover {
+			color: var(--dark-yellow);
+		}
+	}
+}
