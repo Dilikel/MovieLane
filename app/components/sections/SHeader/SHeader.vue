@@ -12,15 +12,18 @@ const user = computed(() => userStore.getUser)
 const menuItems = [
 	{
 		name: 'Фильмы',
+		to: '/movies',
 	},
 	{
 		name: 'Сериалы',
+		to: '/series',
 	},
 	{
 		name: 'Мультфильмы',
+		to: '/cartoons',
 	},
 ]
-const mobileMenuItems = [...menuItems, { name: 'Профиль' }]
+const mobileMenuItems = [...menuItems, { name: 'Профиль', to: '/profile' }]
 
 async function fetchUser() {
 	isLoading.value = true
@@ -56,11 +59,7 @@ onMounted(async () => {
 		<div class="container">
 			<NuxtLink to="/" class="s-header-logo">MovieLane</NuxtLink>
 			<div class="s-header-menu-list">
-				<AMenuItem
-					v-for="item in menuItems"
-					:key="item.name"
-					:name="item.name"
-				/>
+				<AMenuItem v-for="item in menuItems" :key="item.name" v-bind="item" />
 			</div>
 
 			<div class="s-header-right-panel">
@@ -104,7 +103,7 @@ onMounted(async () => {
 			<AMenuItem
 				v-for="item in mobileMenuItems"
 				:key="item.name"
-				:name="item.name"
+				v-bind="item"
 			/>
 		</div>
 	</div>

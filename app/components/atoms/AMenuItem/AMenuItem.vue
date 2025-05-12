@@ -1,13 +1,14 @@
 <script setup>
 defineProps({
 	name: String,
+	to: String,
 })
 </script>
 
 <template>
-	<div class="menu-item">
+	<NuxtLink class="menu-item" :to="to">
 		{{ name }}
-	</div>
+	</NuxtLink>
 </template>
 
 <style src="./AMenuItem.scss" lang="scss" scoped />
