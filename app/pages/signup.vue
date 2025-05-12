@@ -30,6 +30,12 @@ const fields = [
 		placeholder: 'Введите имя',
 	},
 	{
+		id: 'age',
+		type: 'number',
+		label: 'Возраст',
+		placeholder: 'Введите возраст',
+	},
+	{
 		id: 'password',
 		type: 'password',
 		label: 'Пароль',
@@ -43,19 +49,50 @@ const fields = [
 	},
 ]
 
-async function registerUser(formData) {
-	if (!formData.email || !formData.password || !formData.name) {
-		toast.error('Заполните все поля!')
-		return
+function validatePassword(password) {
+	if (!/^[a-zA-Z0-9]+$/.test(password)) {
+		return 'Пароль должен содержать только буквы латинского алфавита и цифры'
 	}
-	if (formData.password !== formData.confirmPassword) {
-		message.value = 'Пароли не совпадают'
+	if (password.length < 6) {
+		return 'Пароль должен содержать не менее 6 символов'
+	}
+	if (!/[A-Z]/.test(password)) {
+		return 'Пароль должен содержать хотя бы одну заглавную букву'
+	}
+	if (!/[a-z]/.test(password)) {
+		return 'Пароль должен содержать хотя бы одну строчную букву'
+	}
+	if (!/[0-9]/.test(password)) {
+		return 'Пароль должен содержать хотя бы одну цифру'
+	}
+	return ''
+}
+
+async function registerUser(formData) {
+	isLoading.value = true
+	message.value = ''
+	const passwordError = validatePassword(formData.password)
+
+	if (passwordError) {
+		message.value = passwordError
 		toast.error(message.value)
+		isLoading.value = false
 		return
 	}
 
-	isLoading.value = true
-	message.value = ''
+	if (formData.password !== formData.confirmPassword) {
+		message.value = 'Пароли не совпадают'
+		toast.error(message.value)
+		isLoading.value = false
+		return
+	}
+
+	if (formData.age < 1) {
+		message.value = 'Возраст должен быть больше 0'
+		toast.error(message.value)
+		isLoading.value = false
+		return
+	}
 
 	await $fetch(`/api/auth/register`, {
 		method: 'POST',
@@ -63,6 +100,7 @@ async function registerUser(formData) {
 			email: formData.email,
 			password: formData.password,
 			name: formData.name,
+			age: formData.age,
 			isSubscribed: false,
 		},
 	})

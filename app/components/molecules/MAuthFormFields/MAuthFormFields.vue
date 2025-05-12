@@ -29,7 +29,7 @@ const handleSubmit = () => {
 			v-model="formData[field.id]"
 		/>
 		<AAuthFormButton :isLoading="isLoading">
-			{{ isLoading ? 'Загрузка...' : buttonText }}
+			{{ isLoading ? 'Подождите...' : buttonText }}
 		</AAuthFormButton>
 	</form>
 </template>
