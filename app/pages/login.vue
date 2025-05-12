@@ -46,7 +46,11 @@ async function loginUser(formData) {
 	})
 		.then(response => {
 			token.value = response.token
-			userStore.setUser(response.user)
+			userStore.setUser({
+				name: response.user.name,
+				email: response.user.email,
+				isSubscribed: response.user.isSubscribed,
+			})
 			toast.success('Вы успешно вошли в аккаунт!')
 			navigateTo('/')
 		})

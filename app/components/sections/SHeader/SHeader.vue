@@ -8,7 +8,7 @@ const isMenuOpen = ref(false)
 const token = useCookie('token')
 const userStore = useUserStore()
 const searchQueryStore = useSearchQueryStore()
-const user = computed(() => userStore.user)
+const user = computed(() => userStore.getUser)
 const menuItems = [
 	{
 		name: 'Фильмы',
@@ -30,10 +30,16 @@ async function fetchUser() {
 		},
 	})
 		.then(response => {
-			userStore.setUser(response.user)
+			userStore.setUser({
+				name: response.user.name,
+				email: response.user.email,
+				isSubscribed: response.user.isSubscribed,
+			})
+			token.value = response.token
 		})
 		.catch(error => {
 			console.error('Error fetching user:', error)
+			token.value = Null
 		})
 		.finally(() => {
 			isLoading.value = false
@@ -41,7 +47,7 @@ async function fetchUser() {
 }
 
 onMounted(async () => {
-	token.value ? await fetchUser() : null
+	if (token.value) await fetchUser()
 })
 </script>
 
@@ -63,8 +69,8 @@ onMounted(async () => {
 				/>
 				<ALoader v-if="isLoading" />
 				<div v-else>
-					<AHeaderLoginButton v-if="!user.value" />
-					<AHeaderProfileButton v-else />
+					<AHeaderLoginButton v-if="!user.name" />
+					<AHeaderProfileButton :name="user.name" v-else />
 				</div>
 			</div>
 			<button
