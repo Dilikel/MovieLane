@@ -3,7 +3,7 @@ export default defineEventHandler(async event => {
 	const authHeader = getHeader(event, 'authorization')
 
 	try {
-		const response = await $fetch(`${config.public.API_URL}/auth`, {
+		const response = await $fetch(`${config.public.API_URL}/auth/me`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
