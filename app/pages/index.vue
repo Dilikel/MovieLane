@@ -1,5 +1,6 @@
 <script setup>
 import { useSearchQueryStore } from '~/stores/searchQuery'
+import { debounce } from 'lodash-es'
 
 const searchQueryStore = useSearchQueryStore()
 const items = ref([])
@@ -16,12 +17,9 @@ async function fetchItems() {
 			isLoading.value = false
 		})
 }
-watch(
-	() => searchQueryStore.query,
-	() => {
-		fetchItems()
-	}
-)
+watch(() => searchQueryStore.query, debounce(fetchItems, 300), {
+	immediate: true,
+})
 
 onMounted(async () => {
 	await fetchItems()

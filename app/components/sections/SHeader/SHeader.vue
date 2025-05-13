@@ -62,7 +62,7 @@ onMounted(async () => {
 				<AMenuItem v-for="item in menuItems" :key="item.name" v-bind="item" />
 			</div>
 
-			<div class="s-header-right-panel">
+			<div class="s-header-right-panel" v-auto-animate>
 				<AInputSearch
 					@search="newValue => searchQueryStore.updateQuery(newValue)"
 				/>
