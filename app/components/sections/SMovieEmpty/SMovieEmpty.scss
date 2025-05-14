@@ -1,0 +1,28 @@
+.s-movie-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 65vh;
+
+	&-container {
+		text-align: center;
+		padding: 2.5rem;
+		border-radius: 1rem;
+		box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+			0 4px 6px -4px rgb(0 0 0 / 0.1);
+		background: linear-gradient(
+			to bottom right,
+			rgba(0, 0, 0, 0.9),
+			rgba(77, 77, 77, 0.2)
+		);
+		max-width: 90%;
+		width: 400px;
+		margin: 1.25rem;
+		p {
+			font-weight: 700;
+			color: white;
+			font-size: 1.5rem;
+			line-height: 1.75;
+		}
+	}
+}

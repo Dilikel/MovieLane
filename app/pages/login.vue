@@ -40,7 +40,7 @@ async function loginUser(formData) {
 	isLoading.value = true
 	message.value = ''
 
-	await $fetch(`/api/auth/login`, {
+	await $fetch(`/api/v1/auth/login`, {
 		method: 'POST',
 		body: { email: formData.email, password: formData.password },
 	})

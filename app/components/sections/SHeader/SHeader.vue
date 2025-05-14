@@ -27,7 +27,7 @@ const mobileMenuItems = [...menuItems, { name: 'Профиль', to: '/profile' 
 
 async function fetchUser() {
 	isLoading.value = true
-	await $fetch('/api/auth/me', {
+	await $fetch('/api/v1/auth/me', {
 		headers: {
 			Authorization: `Bearer ${token.value}`,
 		},
@@ -58,6 +58,7 @@ onMounted(async () => {
 	<header class="s-header">
 		<div class="container">
 			<NuxtLink to="/" class="s-header-logo">MovieLane</NuxtLink>
+
 			<div class="s-header-menu-list">
 				<AMenuItem v-for="item in menuItems" :key="item.name" v-bind="item" />
 			</div>

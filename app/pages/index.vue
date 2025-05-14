@@ -1,34 +1,33 @@
 <script setup>
 import { useSearchQueryStore } from '~/stores/searchQuery'
-import { debounce } from 'lodash-es'
+import { useMoviesStore } from '~/stores/movies'
 
 const searchQueryStore = useSearchQueryStore()
-const items = ref([])
-const isLoading = ref(true)
+const moviesStore = useMoviesStore()
+const items = computed(() => moviesStore.filteredMovies(searchQueryStore.query))
+const isLoading = ref(moviesStore.movies.length === 0 ? true : false)
 async function fetchItems() {
-	await $fetch('/api/movies', {
-		params: { name: searchQueryStore.query },
-	})
+	await $fetch('/api/v1/movies')
 		.then(response => {
-			items.value = response
+			moviesStore.setMovies(response)
 		})
-		.catch(error => {})
+		.catch(error => {
+			console.log(`Ошибка при загрузке фильмов: ${error}`)
+		})
 		.finally(() => {
 			isLoading.value = false
 		})
 }
-watch(() => searchQueryStore.query, debounce(fetchItems, 300), {
-	immediate: true,
-})
 
 onMounted(async () => {
-	await fetchItems()
+	if (!moviesStore.movies.length) await fetchItems()
 })
 </script>
 
 <template>
 	<main class="main">
 		<SLoader :is-loading="isLoading" />
-		<SMovieCardList :items="items" />
+		<SMovieCardList v-if="items.length" :items="items" />
+		<SMovieEmpty v-else />
 	</main>
 </template>

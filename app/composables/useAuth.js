@@ -8,7 +8,7 @@ export function useAuth() {
 		const token = useCookie('token')
 		if (!token.value || token.value.trim() === '') return
 
-		await $fetch(`${config.public.API_URL}/auth_me`, {
+		await $fetch(`${config.public.API_URL}/v1/auth/me`, {
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token.value}`,
