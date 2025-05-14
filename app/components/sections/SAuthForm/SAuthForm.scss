@@ -13,10 +13,6 @@
 		width: 100%;
 		transition: all 0.3s ease;
 
-		&:hover {
-			box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-		}
-
 		h2 {
 			font-size: 2rem;
 			font-weight: 700;
@@ -31,9 +27,11 @@
 			margin-bottom: 2rem;
 			text-align: center;
 		}
+	}
 
-		.MAuthFields {
-			margin-bottom: 1.5rem;
+	@media (hover: hover) {
+		&-content:hover {
+			box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
 		}
 	}
 

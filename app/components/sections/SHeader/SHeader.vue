@@ -102,6 +102,7 @@ onMounted(async () => {
 		</div>
 		<div class="s-mobile-menu-list">
 			<AMenuItem
+				@click="isMenuOpen = false"
 				v-for="item in mobileMenuItems"
 				:key="item.name"
 				v-bind="item"
