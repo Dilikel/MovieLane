@@ -42,7 +42,7 @@ async function fetchUser() {
 		})
 		.catch(error => {
 			console.error('Error fetching user:', error)
-			token.value = Null
+			token.value = null
 		})
 		.finally(() => {
 			isLoading.value = false
