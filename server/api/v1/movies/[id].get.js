@@ -10,7 +10,7 @@ export default defineEventHandler(async event => {
 	const config = useRuntimeConfig()
 
 	try {
-		const movie = await $fetch(`${config.public.API_URL}/movie/${movieId}`, {
+		const movie = await $fetch(`${config.public.API_URL}/v1/movie/${movieId}`, {
 			headers: {
 				'Content-Type': 'application/json',
 				'x-api-password': config.public.SECRET_KEY,

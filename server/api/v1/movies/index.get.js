@@ -3,7 +3,7 @@ export default defineEventHandler(async event => {
 	const query = getQuery(event)
 
 	try {
-		const movies = await $fetch(`${config.public.API_URL}/movie`, {
+		const movies = await $fetch(`${config.public.API_URL}/v1/movie`, {
 			params: { name: query.name },
 			headers: {
 				'Content-Type': 'application/json',

@@ -1,0 +1,6 @@
+.a-movie-item-info {
+	color: var(--info-light-gray);
+	&:not(:last-child) {
+		margin-bottom: 10px;
+	}
+}
