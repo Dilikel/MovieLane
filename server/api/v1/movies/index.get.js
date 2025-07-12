@@ -5,10 +5,10 @@ export default defineEventHandler(async event => {
 	try {
 		const movies = await $fetch(`${config.public.API_URL}/movie`, {
 			params: { name: query.name },
-			headers: {
-				'Content-Type': 'application/json',
-				'x-api-password': config.public.SECRET_KEY,
-			},
+			// headers: {
+			// 	'Content-Type': 'application/json',
+			// 	'x-api-password': config.public.SECRET_KEY,
+			// },
 		})
 
 		return movies
