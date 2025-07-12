@@ -14,7 +14,7 @@ const emit = defineEmits(['submit'])
 </script>
 
 <template>
-	<section class="s-auth-form animate__animated animate__fadeIn">
+	<section class="s-auth-form animate__animated animate__fadeIn animate__fast">
 		<div class="s-auth-form-content">
 			<h2>{{ title }}</h2>
 			<p>{{ text }}</p>

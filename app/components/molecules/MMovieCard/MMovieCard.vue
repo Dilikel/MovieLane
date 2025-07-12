@@ -1,17 +1,17 @@
 <script setup>
 defineProps({
 	id: Number,
-	imageUrl: String,
+	image_url: String,
 	grade: Number,
 	name: String,
-	genres: String,
+	genres: Array,
 })
 </script>
 
 <template>
 	<div class="m-movie-card" @click="navigateTo(`movie/${id}`)">
 		<div class="m-movie-card-image">
-			<img :src="imageUrl" alt="movie" class="m-movie-card-img" />
+			<img :src="image_url" alt="movie" class="m-movie-card-img" />
 			<div
 				class="m-movie-card-cover"
 				:class="{
@@ -25,7 +25,9 @@ defineProps({
 		</div>
 		<div class="m-movie-card-info">
 			<h2 class="m-movie-card-info-name">{{ name }}</h2>
-			<p class="m-movie-card-info-genres">{{ genres }}</p>
+			<p class="m-movie-card-info-genres">
+				{{ genres?.map(genre => genre.name).join(', ') }}
+			</p>
 		</div>
 	</div>
 </template>

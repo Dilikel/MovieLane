@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import 'hamburgers/dist/hamburgers.min.css'
 import { useUserStore } from '~/stores/user'
 import { useSearchQueryStore } from '~/stores/searchQuery'
+import { useAuth } from '~/composables/useAuth'
 
 const isLoading = ref(false)
 const isMenuOpen = ref(false)
@@ -24,33 +25,10 @@ const menuItems = [
 	},
 ]
 const mobileMenuItems = [...menuItems, { name: 'Профиль', to: '/profile' }]
-
-async function fetchUser() {
-	isLoading.value = true
-	await $fetch('/api/v1/auth/me', {
-		headers: {
-			Authorization: `Bearer ${token.value}`,
-		},
-	})
-		.then(response => {
-			userStore.setUser({
-				name: response.user.name,
-				email: response.user.email,
-				isSubscribed: response.user.isSubscribed,
-			})
-			token.value = response.token
-		})
-		.catch(error => {
-			console.error('Error fetching user:', error)
-			token.value = null
-		})
-		.finally(() => {
-			isLoading.value = false
-		})
-}
+const { fetchUser } = useAuth()
 
 onMounted(async () => {
-	if (token.value) await fetchUser()
+	if (token.value) await fetchUser(isLoading)
 })
 </script>
 
@@ -65,7 +43,7 @@ onMounted(async () => {
 
 			<div class="s-header-right-panel" v-auto-animate>
 				<AInputSearch
-					@search="newValue => searchQueryStore.updateQuery(newValue)"
+					@search="(newValue: string) => searchQueryStore.updateQuery(newValue)"
 				/>
 				<ALoader v-if="isLoading" />
 				<div v-else>
@@ -84,7 +62,7 @@ onMounted(async () => {
 			</button>
 			<AInputSearch
 				class="s-header-mobile-search"
-				@search="newValue => searchQueryStore.updateQuery(newValue)"
+				@search="(newValue: string) => searchQueryStore.updateQuery(newValue)"
 			/>
 		</div>
 	</header>

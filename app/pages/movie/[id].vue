@@ -1,10 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { useToast } from 'vue-toastification'
+import type { Movie } from '~/types/movie'
 
 const route = useRoute()
-const movie = ref({})
+const movie = ref<Movie>({} as Movie)
 const isLoading = ref(true)
 const toast = useToast()
+const selectedVideoLink = ref('')
+const qualityOptions = ref<{ name: string; value: string }[]>([])
 
 watchEffect(() => {
 	if (movie?.value?.name) {
@@ -14,9 +17,16 @@ watchEffect(() => {
 	}
 })
 async function fetchMovie() {
-	await $fetch(`/api/v1/movies/${route.params.id}`)
+	await $fetch<Movie>(`/api/v1/movies/${route.params.id}`)
 		.then(response => {
 			movie.value = response
+			selectedVideoLink.value = movie.value.video_links[1080]
+			qualityOptions.value = Object.entries(movie.value.video_links).map(
+				([key, value]) => ({
+					name: `${key}p`,
+					value,
+				})
+			)
 		})
 		.catch(error => {
 			console.error('Error fetching movie:', error)
@@ -28,12 +38,19 @@ async function fetchMovie() {
 		})
 }
 
-fetchMovie()
+onMounted(async () => {
+	await fetchMovie()
+})
 </script>
 
 <template>
-	<main class="main">
+	<main class="main animate__animated animate__fadeIn animate__fast">
 		<SLoader :is-loading="isLoading" />
 		<SMovieInfo :movie="movie" />
+		<SMoviePlayer
+			:movie="movie"
+			:video-link="selectedVideoLink"
+			:quality-options="qualityOptions"
+		/>
 	</main>
 </template>

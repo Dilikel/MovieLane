@@ -1,7 +1,9 @@
-<script setup>
-const { movie } = defineProps({
-	movie: Object,
-})
+<script setup lang="ts">
+import type { Movie, BaseArray } from '~/types/movie'
+
+const { movie } = defineProps<{
+	movie: Movie
+}>()
 
 const infoItems = computed(() => [
 	{
@@ -14,23 +16,33 @@ const infoItems = computed(() => [
 	},
 	{
 		name: 'Страна',
-		value: movie?.country,
+		value: movie?.countries
+			?.map((country: BaseArray) => country.name)
+			.join(', '),
 	},
 	{
 		name: 'Оригинальное название',
-		value: movie?.originalName,
+		value: movie?.original_name,
+	},
+	{
+		name: 'Жанры',
+		value: movie?.genres?.map((genre: BaseArray) => genre.name).join(', '),
 	},
 	{
 		name: 'Категории',
-		value: movie?.categories,
+		value: movie?.categories
+			?.map((category: BaseArray) => category.name)
+			.join(', '),
 	},
 	{
 		name: 'Режиссер',
-		value: movie?.director,
+		value: movie?.directors
+			?.map((director: BaseArray) => director.name)
+			.join(', '),
 	},
 	{
 		name: 'Актеры',
-		value: movie?.actors,
+		value: movie?.actors?.map((actor: BaseArray) => actor.name).join(', '),
 	},
 ])
 </script>
@@ -41,7 +53,7 @@ const infoItems = computed(() => [
 			<div class="s-movie-info__left">
 				<div class="s-movie-info__left-image">
 					<img
-						:src="movie?.imageUrl"
+						:src="movie?.image_url"
 						alt="movie"
 						class="s-movie-info__left-image-img"
 					/>

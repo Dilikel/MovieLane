@@ -41,13 +41,13 @@
 				font-size: 1rem;
 				box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				&-high-grade {
-					border-color: #4caf50;
+					border-color: var(--green);
 				}
 				&-medium-grade {
-					border-color: #ff9800;
+					border-color: var(--orange);
 				}
 				&-low-grade {
-					border-color: #f44336;
+					border-color: var(--red);
 				}
 			}
 		}
@@ -59,7 +59,7 @@
 		h1 {
 			font-size: 2rem;
 			margin-bottom: 15px;
-			color: var(--input-text-gray);
+			color: white;
 		}
 		p {
 			font-size: 1rem;

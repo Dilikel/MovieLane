@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { useToast } from 'vue-toastification'
 import { useUserStore } from '~/stores/user'
+import type { LoginResponse } from '~/types/user'
 
 definePageMeta({
 	middleware: ['auth'],
@@ -31,7 +32,12 @@ const fields = [
 	},
 ]
 
-async function loginUser(formData) {
+interface FormData {
+	email: string
+	password: string
+}
+
+async function loginUser(formData: FormData) {
 	if (!formData.email || !formData.password) {
 		toast.error('Заполните все поля!')
 		return
@@ -40,16 +46,14 @@ async function loginUser(formData) {
 	isLoading.value = true
 	message.value = ''
 
-	await $fetch(`/api/v1/auth/login`, {
+	await $fetch<LoginResponse>(`/api/v1/auth/login`, {
 		method: 'POST',
 		body: { email: formData.email, password: formData.password },
 	})
 		.then(response => {
 			token.value = response.token
 			userStore.setUser({
-				name: response.user.name,
-				email: response.user.email,
-				isSubscribed: response.user.isSubscribed,
+				...response.user,
 			})
 			toast.success('Вы успешно вошли в аккаунт!')
 			navigateTo('/')

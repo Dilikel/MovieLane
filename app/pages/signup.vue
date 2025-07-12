@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { useToast } from 'vue-toastification'
 import { useUserStore } from '~/stores/user'
+import type { LoginResponse } from '~/types/user'
 
 definePageMeta({
 	middleware: ['auth'],
@@ -49,7 +50,15 @@ const fields = [
 	},
 ]
 
-function validatePassword(password) {
+interface FormData {
+	email: string
+	name: string
+	age: number
+	password: string
+	confirmPassword: string
+}
+
+function validatePassword(password: string) {
 	if (!/^[a-zA-Z0-9]+$/.test(password)) {
 		return 'Пароль должен содержать только буквы латинского алфавита и цифры'
 	}
@@ -68,7 +77,7 @@ function validatePassword(password) {
 	return ''
 }
 
-async function registerUser(formData) {
+async function registerUser(formData: FormData) {
 	isLoading.value = true
 	message.value = ''
 	const passwordError = validatePassword(formData.password)
@@ -94,22 +103,19 @@ async function registerUser(formData) {
 		return
 	}
 
-	await $fetch(`/api/v1/auth/register`, {
+	await $fetch<LoginResponse>(`/api/v1/auth/register`, {
 		method: 'POST',
 		body: {
 			email: formData.email,
 			password: formData.password,
 			name: formData.name,
 			age: formData.age,
-			isSubscribed: false,
 		},
 	})
 		.then(response => {
 			token.value = response.token
 			userStore.setUser({
-				name: response.user.name,
-				email: response.user.email,
-				isSubscribed: response.user.isSubscribed,
+				...response.user,
 			})
 			toast.success('Вы успешно вошли в аккаунт!')
 			navigateTo('/')

@@ -1,7 +1,8 @@
-<script setup>
-defineProps({
-	items: Array,
-})
+<script setup lang="ts">
+import type { Movie } from '~/types/movie'
+defineProps<{
+	items: Movie[]
+}>()
 </script>
 
 <template>
