@@ -1,16 +1,13 @@
 <script setup>
-import { useToast } from 'vue-toastification'
-import { useUserStore } from '~/stores/user'
-
 definePageMeta({
-	middleware: ['auth'],
-})
+  middleware: ['auth'],
+});
 
 useHead({
-	title: 'Профиль',
-})
+  title: 'Профиль',
+});
 </script>
 
 <template>
-	<main></main>
+  <main></main>
 </template>

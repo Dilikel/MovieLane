@@ -1,11 +1,11 @@
 <script setup>
-import 'animate.css'
+import 'animate.css';
 </script>
 
 <template>
-	<div class="animate__animated animate__fadeIn animate__faster">
-		<SHeader />
-		<slot />
-		<SFooter />
-	</div>
+  <div class="animate__animated animate__fadeIn animate__faster">
+    <SHeader />
+    <slot />
+    <SFooter />
+  </div>
 </template>
